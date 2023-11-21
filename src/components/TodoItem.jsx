@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { updateTodo } from "../api/todos";
-import useNoteActions from "../hook/useTodoActions";
+import useNoteActions from "../hooks/useTodoActions";
 
 function TodoItem({ todo }) {
   const queryClient = useQueryClient();
@@ -53,7 +53,9 @@ function TodoItem({ todo }) {
           )}
         </label>
         <h4
-          className='text-gray-900 cursor-pointer'
+          className={`text-gray-900 cursor-pointer ${
+            todo.isDone ? "line-through" : ""
+          }`}
           onClick={() => navigate(`/todo/${todo.id}`)}
         >
           {todo.title}

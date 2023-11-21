@@ -1,19 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { fetchTodo } from "../api/todos";
 import Button from "../components/Button";
+import { useTodo } from "../hooks/useTodo";
 
 const Todos = () => {
   const { id } = useParams();
-  const {
-    isLoading,
-    isError,
-    data: todo,
-    error,
-  } = useQuery({
-    queryKey: ["todos", id],
-    queryFn: () => fetchTodo(id),
-  });
+  const { isLoading, isError, data: todo, error } = useTodo(id);
 
   if (isLoading) return "Loading...";
   if (isError) return `Error: ${error.message}`;

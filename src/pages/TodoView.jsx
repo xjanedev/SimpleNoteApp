@@ -1,30 +1,20 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchTodos } from "../api/todos";
-import "../index.css";
 import TodoItem from "../components/TodoItem";
+import { useTodos } from "../hooks/useTodos";
+import "../index.css";
 
 const TodoView = () => {
   const [search, setSearch] = useState("");
+  const { isLoading, isError, data: todos, error } = useTodos();
 
-  const {
-    isLoading,
-    isError,
-    data: todos,
-    error,
-  } = useQuery({
-    queryKey: ["todos"],
-    queryFn: fetchTodos,
-  });
-
-  if (isLoading) return "Loading...";
+  if (isLoading) return "loading...";
   if (isError) return `Error: ${error.message}`;
 
   const onChangeSearch = e => {
     setSearch(e.target.value);
   };
 
-  const filterTodos = () => {
+  const filteredTodos = () => {
     if (!todos) return [];
 
     if (search === "") {
@@ -39,6 +29,8 @@ const TodoView = () => {
     });
   };
 
+  console.log(search);
+
   return (
     <div>
       <input
@@ -48,7 +40,7 @@ const TodoView = () => {
         placeholder='검색어를 입력하세요'
       />
       <div className='pt-14 grid grid-cols-2 gap-4'>
-        {filterTodos().map(todo => (
+        {filteredTodos().map(todo => (
           <TodoItem key={todo.id} todo={todo} data={todos} />
         ))}
       </div>

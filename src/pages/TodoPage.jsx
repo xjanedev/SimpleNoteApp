@@ -1,22 +1,13 @@
 import TodoView from "./TodoView";
-import TodoSummary from "../components/TodoSummary";
-import { useQuery } from "@tanstack/react-query";
-import { fetchTodos } from "../api/todos";
 import NewTodoBtn from "../components/NewTodoBtn";
+import TodoSummary from "../components/TodoSummary";
+import { useTodos } from "../hooks/useTodos";
 
 export default function TodoList() {
   const currentDate = new Date();
-  const {
-    isLoading,
-    isError,
-    data: todos,
-    error,
-  } = useQuery({
-    queryKey: ["todos"],
-    queryFn: fetchTodos,
-  });
+  const { isLoading, isError, data: todos, error } = useTodos();
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return "loading...";
   if (isError) return `Error: ${error.message}`;
 
   return (

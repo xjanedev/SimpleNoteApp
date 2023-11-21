@@ -1,5 +1,5 @@
 import TodoForm from "../components/TodoForm";
-import useNoteActions from "../hook/useTodoActions";
+import useNoteActions from "../hooks/useTodoActions";
 
 const TodoEditor = () => {
   const { isLoading, isError, todo, error, handleSubmit } = useNoteActions();
