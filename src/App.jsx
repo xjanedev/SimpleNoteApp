@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import TodoLists from "./pages/TodoLists";
+import TodoPage from "./pages/TodoPage";
 import Todos from "./pages/Todos";
 import TodoEditor from "./pages/TodoEditor";
 import "./App.css";
@@ -11,7 +11,7 @@ function App() {
     <div className='App'>
       <Header />
       <Routes>
-        <Route path='/' element={<TodoLists />} />
+        <Route path='/' element={<TodoPage />} />
         <Route path='/todo/:id/new' element={<AddTodo />} />
         <Route path='/todo/:id' element={<Todos />} />
         <Route path='/todo/:id/edit' element={<TodoEditor />} />

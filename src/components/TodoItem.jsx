@@ -1,44 +1,30 @@
-import { memo } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { updateTodo, deleteTodo } from "../api/todos";
+import { useQueryClient } from "@tanstack/react-query";
+import { updateTodo } from "../api/todos";
+import useNoteActions from "../hook/useTodoActions";
 
-const TodoItem = ({ todo }) => {
-  const navigate = useNavigate();
+function TodoItem({ todo }) {
   const queryClient = useQueryClient();
-
-  const deleteTodoMutation = useMutation({
-    mutationFn: deleteTodo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
+  const { navigate, handleDeleteTodo } = useNoteActions({
+    todo,
   });
-
-  const handleDelete = id => {
-    deleteTodoMutation.mutate(id);
-  };
 
   const onChangeCheckbox = () => {
     const updatedTodo = { ...todo, isDone: !todo.isDone };
     const optimisticUpdate = oldData => {
-      const updatedData = oldData.map(item => {
-        if (item.id === updatedTodo.id) {
-          return updatedTodo;
-        }
-        return item;
-      });
-      return updatedData;
+      return oldData.map(item =>
+        item.id === updatedTodo.id ? updatedTodo : item
+      );
     };
 
     updateTodo(updatedTodo)
-      .then(response => {})
-      .catch(error => {});
+      .then(() => {})
+      .catch(() => {});
     queryClient.setQueryData(["todos"], optimisticUpdate);
   };
 
   return (
     <div key={todo.id} className='p-4 mb-4 bg-purple-100 rounded-lg text-sm'>
-      <div className='flex items-center mb-2'>
+      <div className='flex items-center pb-2'>
         <input
           type='checkbox'
           onChange={onChangeCheckbox}
@@ -73,7 +59,32 @@ const TodoItem = ({ todo }) => {
           {todo.title}
         </h4>
       </div>
-      <div className='text-gray-500 text-sm line-clamp-1'>
+      {todo.deadline && (
+        <div className='text-gray-500 text-xs pb-3'>
+          마감일: {new Date(todo.deadline).toLocaleDateString()}
+        </div>
+      )}
+      {todo.tags && (
+        <div className='flex space-x-2 pb-2'>
+          {todo.tags.split(",").map((tag, index) => (
+            <div
+              key={index}
+              className={`text-gray-100 text-xs px-2 py-1 rounded-md ${
+                tag === "시작 전"
+                  ? "bg-blue-500"
+                  : tag === "진행 중"
+                  ? "bg-yellow-500"
+                  : tag === "완료"
+                  ? "bg-green-500"
+                  : "bg-gray-300"
+              }`}
+            >
+              {tag}
+            </div>
+          ))}
+        </div>
+      )}
+      <div className='text-gray-500 text-xs line-clamp-1'>
         {todo.description}
       </div>
       <div className='flex justify-end pt-4 gap-2'>
@@ -85,13 +96,13 @@ const TodoItem = ({ todo }) => {
         </button>
         <button
           className='bg-purple-600 text-white w-auto px-4 py-2 rounded-full'
-          onClick={() => handleDelete(todo.id)}
+          onClick={() => handleDeleteTodo(todo.id)}
         >
           Delete
         </button>
       </div>
     </div>
   );
-};
+}
 
-export default memo(TodoItem);
+export default TodoItem;

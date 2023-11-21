@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-function CheckList({ todos }) {
+function TodoSummary({ todos }) {
   const { totalCount, doneCount, notDoneCount } = useMemo(() => {
     const totalCount = todos.length;
     const doneCount = todos.filter(todo => todo.isDone).length;
@@ -21,7 +21,7 @@ function CheckList({ todos }) {
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 20 20'
           fill='currentColor'
-          className='w-4 h-4 mr-2 text-green-500'
+          className='w-4 h-4 mr-2 text-purple-500'
         >
           <path
             fillRule='evenodd'
@@ -37,7 +37,7 @@ function CheckList({ todos }) {
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 20 20'
           fill='currentColor'
-          className='w-4 h-4 mr-2 text-green-500'
+          className='w-4 h-4 mr-2 text-purple-500'
         >
           <path
             fillRule='evenodd'
@@ -53,7 +53,7 @@ function CheckList({ todos }) {
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 20 20'
           fill='currentColor'
-          className='w-4 h-4 mr-2 text-green-500'
+          className='w-4 h-4 mr-2 text-purple-500'
         >
           <path
             fillRule='evenodd'
@@ -68,4 +68,4 @@ function CheckList({ todos }) {
   );
 }
 
-export default CheckList;
+export default TodoSummary;

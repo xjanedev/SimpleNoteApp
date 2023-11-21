@@ -1,14 +1,11 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodos } from "../api/todos";
-import { useNavigate } from "react-router-dom";
 import "../index.css";
 import TodoItem from "../components/TodoItem";
-import CheckList from "../components/CheckList";
 
-const TodoLists = () => {
+const TodoView = () => {
   const [search, setSearch] = useState("");
-  const navigate = useNavigate();
 
   const {
     isLoading,
@@ -43,21 +40,14 @@ const TodoLists = () => {
   };
 
   return (
-    <div className='flex-1'>
-      <button
-        className='w-full bg-purple-600 text-white text-sm py-2 rounded-full'
-        onClick={() => navigate("/todo/:id/new")}
-      >
-        Add New Note
-      </button>
-      <CheckList todos={todos} />
+    <div>
       <input
-        className='w-full pt-14 border-b border-gray-200 py-2 focus:outline-none focus:border-purple-600 text-sm'
+        className='w-[280px] pt-14 border-b border-gray-200 py-2 focus:outline-none focus:border-purple-600 text-xs'
         value={search}
         onChange={onChangeSearch}
         placeholder='검색어를 입력하세요'
       />
-      <div className='pt-14'>
+      <div className='pt-14 grid grid-cols-2 gap-4'>
         {filterTodos().map(todo => (
           <TodoItem key={todo.id} todo={todo} data={todos} />
         ))}
@@ -66,4 +56,4 @@ const TodoLists = () => {
   );
 };
 
-export default TodoLists;
+export default TodoView;
