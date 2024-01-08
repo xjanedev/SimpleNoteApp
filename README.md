@@ -1,13 +1,14 @@
 # Simple Note
 
-> **Tanstack-Query**를 활용한 **CRUD** 일정관리 웹 서비스
+> **Tanstack-Query**를 활용한 일정관리 서비스
 
 <br />
 
 ### 🛠️ 기술스택
-<br />
 
 - React, Tankstack-Query(React-Query), Javascript, Tailwind-css, json-server, Glitch, Vercel
+
+<br />
 
 ### 🪐 구현 기능
 
@@ -16,31 +17,21 @@
 - 전체 노트 키워드 검색 기능과 마감일, 진행 상황 태그로 확인 가능
 - **useMemo**, **memo**로 컴포넌트 최적화
 - **Optimistic Update**(낙관적 업데이트)로 체크박스 **UX** 개선
-- **모듈성과 재사용성**을 위해 ****재 사용되는 컴포넌트를 캡슐화
-- 여러 페이지에서 공통으로 사용되는 레이아웃을 만들어서 사용자에게 일관된 UI/UX를 제공
+- **모듈성과 재사용성**을 위해 자주 사용되는 컴포넌트 캡슐화
+- 여러 페이지에서 공통으로 사용되는 레이아웃을 만들어서 사용자에게 일관된 **UI/UX**를 제공
+
+<br />
 
 
 ### 💎 프로젝트 데모
 https://github.com/xjanedev/simple-note/assets/127685269/d8b22596-6d6e-49be-a4c4-5cc4be68c6bc
 
-
-
-<img width="100%" alt="첫 번째 이미지" src="https://github.com/xjanedev/simple-note/assets/127685269/86a6cb48-bef9-4f3f-91a2-24d835a70412">
-<img width="100%" alt="두 번째 이미지" src="https://github.com/xjanedev/simple-note/assets/127685269/89e92da1-0546-4757-8610-1748e05c3379">
-
-
-
-
-
-
-
-
-
+<br />
 
 ### 📚 프로젝트로 배운 점
 **Tanstack-Query의 활용**
 
-- **Tanstack-Query**로 ****서버 데이터와의 작업을 비교적 간단하고 편하게 할 수 있었다. 자체적인 개발자도구(**ReactQueryDevtools)**를 제공해주어 디버깅에도 편리하다. 또한 리액트 쿼리의 **useQuery, useMutation** 훅을 사용함으로써 데이터 가져오기 및 변형 과정을 간소화 하고 캐싱, 백그라운드 업데이트, 오류 처리와 같은 내장 기능을 제공하여 더 효율적이고 강력한 데이터 관리 전략을 간단하게 처리 할 수 있었다.
+- **Tanstack-Query**로 서버 데이터와의 작업을 비교적 간단하고 편하게 할 수 있었다. 자체적인 개발자도구(ReactQueryDevtools)를 제공해주어 디버깅에도 편리하다. 또한 리액트 쿼리의 **useQuery, useMutation** 훅을 사용함으로써 데이터 가져오기 및 변형 과정을 간소화 하고 캐싱, 백그라운드 업데이트, 오류 처리와 같은 내장 기능을 제공하여 더 효율적이고 강력한 데이터 관리 전략을 간단하게 처리 할 수 있었다.
 
 **비즈니스 로직 분리**
 
@@ -49,5 +40,8 @@ https://github.com/xjanedev/simple-note/assets/127685269/d8b22596-6d6e-49be-a4c4
 **Memo와 useMemo를 활용한 컴포넌트 최적화 고민**
 
 - 이 프로젝트에서 **memo**와 **useMemo**를 활용한 컴포넌트 최적화에 대해 많은 고민을 했다. React DevTools와 같은 개발자 도구를 활용하여 불필요한 렌더링이 일어나는 부분을 파악하고, 성능 저하의 원인을 분석했다. 그 결과, 상대적으로 단순한 비즈니스 로직을 갖는 일정 관리 애플리케이션에서는 메모이징이 많이 필요하진 않다고 판단하여, 공통적인 버튼과 헤더에만 적용시켜 리렌더링을 방지했다. 메모이징의 필요성과 효과를 깊이 있게 이해하고 적용하는 것이 중요하며, 이를 통해 앞으로 앱의 성능을 현명하게 개선할 수 있도록 많은 학습과 연습이 필요하다고 생각한다.
+
+<br />
+
 
 
